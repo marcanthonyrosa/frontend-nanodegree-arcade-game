@@ -1,3 +1,18 @@
 body {
     text-align: center;
 }
+
+canvas {
+  /*border: 1px solid black;*/
+}
+
+button {
+  /*float:right;*/
+}
+
+.flex {
+  /*display: flex;*/
+  flex-direction: row;
+  flex-wrap: nowrap;
+  flex-flow: center;
+}
