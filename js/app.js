@@ -120,28 +120,53 @@ Player.prototype.reset = function () {
   document.getElementById("lives").innerHTML = this.lives;
 };
 
+Player.prototype.updateScore = function () {
+  document.getElementById("score").innerHTML = this.score;
+  document.getElementById("lives").innerHTML = this.lives;
+
+}
+
 Player.prototype.resetGame = function () {
   this.score = 0;
   this.lives = 5;
   player.reset();
   document.getElementById("game-over").innerHTML = "";
+};
+
+Player.prototype.newLife = function () {
+  this.lives = this.lives +1;
+  console.log(this.lives);
 }
 
 
 // Creating hearts objects!
 
 var Hearts = function () {
-  this.sprite = 'images/enemy-bug.png' ;
-  this.x = 100;
-  this.y = 200;
-  // this.x = 0 + (101 * Math.floor(Math.random()*3))
-  // this.y = 51 + (83 * Math.floor(Math.random()*3));
+  this.sprite = 'images/Heart.png' ;
+  this.x = 0 + (101 * Math.floor(Math.random()*7));
+  this.y = 83 + (83 * Math.floor(Math.random()*3));
+  this.appear = true;
 };
-
 Hearts.prototype = Object.create(Enemy.prototype);
 Hearts.prototype.constructor = Hearts;
 Hearts.prototype.update = function () {
 
+  if (player.x <this.x+ 75 &&
+      player.x + 65 > this.x &&
+      player.y < this.y + 50 &&
+      player.y + 65 > this.y) {
+        this.collide();
+        player.updateScore();
+      }
+};
+Hearts.prototype.collide = function () {
+  while (this.appear === true) {
+    player.newLife();
+    this.appear = false;
+  }
+
+};
+Hearts.prototype.collision = function () {
 };
 
 
@@ -160,6 +185,11 @@ var enemy5 = new Enemy();
 var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 
 var heart1 = new Hearts();
+var heart2 = new Hearts();
+var heart3 = new Hearts();
+var heart4 = new Hearts();
+
+var allHearts = [heart1, heart2, heart3, heart4];
 
 
 // This listens for key presses and sends the keys to your

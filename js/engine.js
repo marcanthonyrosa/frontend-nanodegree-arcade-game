@@ -98,7 +98,9 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
-        heart1.update();
+        allHearts.forEach(function(heart) {
+          heart.update(dt);
+        });
 
     }
 
@@ -160,6 +162,17 @@ var Engine = (function(global) {
         } else {
           player.render();
         }
+
+        allHearts.forEach(function(heart) {
+          if (heart.appear === true) {
+            heart.render();
+          };
+          // heart.render();
+        });
+
+        // if (heart1.appear === true) {
+        //   heart1.render();
+        // }
     }
 
     /* This function does nothing but it could have been a good place to
