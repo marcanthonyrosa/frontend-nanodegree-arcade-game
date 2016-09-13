@@ -116,8 +116,7 @@ Player.prototype.handleInput = function(allowedKeys) {
 Player.prototype.reset = function () {
   this.x = 303;
   this.y = 386;
-  document.getElementById("score").innerHTML = this.score;
-  document.getElementById("lives").innerHTML = this.lives;
+  this.updateScore();
 };
 
 Player.prototype.updateScore = function () {
@@ -131,6 +130,10 @@ Player.prototype.resetGame = function () {
   this.lives = 5;
   player.reset();
   document.getElementById("game-over").innerHTML = "";
+  for (var i = 0; i< allHearts.length; i++) {
+    allHearts[i].appear = true;
+    allHearts[i].reset();
+  }
 };
 
 Player.prototype.newLife = function () {
@@ -145,6 +148,7 @@ var Hearts = function () {
   this.sprite = 'images/Heart.png' ;
   this.x = 0 + (101 * Math.floor(Math.random()*7));
   this.y = 83 + (83 * Math.floor(Math.random()*3));
+  this.xy = this.x +" "+this.y;
   this.appear = true;
 };
 Hearts.prototype = Object.create(Enemy.prototype);
@@ -169,6 +173,11 @@ Hearts.prototype.collide = function () {
 Hearts.prototype.collision = function () {
 };
 
+Hearts.prototype.reset = function() {
+  this.x = 0 + (101 * Math.floor(Math.random()*7));
+  this.y = 83 + (83 * Math.floor(Math.random()*3));
+}
+
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -190,6 +199,21 @@ var heart3 = new Hearts();
 var heart4 = new Hearts();
 
 var allHearts = [heart1, heart2, heart3, heart4];
+
+var noRepeatHearts = function () {
+  for (var i = 0; i< allHearts.length; i++) {
+    for (var j = i+1; j < allHearts.length; j++) {
+      if (allHearts[i].xy === allHearts[j].xy) {
+        allHearts[j].reset();
+        console.log("reset it!");
+      }
+    }
+  }
+};
+
+noRepeatHearts();
+
+
 
 
 // This listens for key presses and sends the keys to your
