@@ -1,51 +1,40 @@
-// Enemies our player must avoid
 var Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = 0 - (Math.floor(Math.random()*4) *65);
     this.y = 51 + (83 * Math.floor(Math.random()*3));
     this.speed = 40* (1 + Math.random()*5);
 
+    // I added in logic to randomly position the enemy in new starting
+    // positions across the x axis, across 1 of the three stone rows,
+    // and with a randomly generated speed to make the gameplay dynamic
 };
 
-// Update the enemy's position, required method for game
-// Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     if (this.x > 707) {
       this.x = -101;
     }
+    // this above code resets the player's x coordinates once the enemy
+    // falls off the edge of the canvas
+
     this.x = this.x + (this.speed* dt);
 
     // Below is the logic for identifying collisions
+    // which looks to see if an enemy is within a certain
+    // proximity to the player's x and y coordinates
     if (player.x <this.x+ 75 &&
         player.x + 65 > this.x &&
         player.y < this.y + 50 &&
         player.y + 65 > this.y) {
-          this.collide();
-          player.reset();
-
+          player.collide();
         }
-
+        // once a collision is detected, we run the player.collide
+        // function which deducts points and lives
 };
 Enemy.prototype.collide = function () {
-  player.collide();
 };
-
-// Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
-
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
 
 var Player = function() {
   this.sprite = "images/char-boy.png";
@@ -54,6 +43,9 @@ var Player = function() {
   this.score = 0;
   this.lives = 5;
 };
+// This Class sets the player's initial x and y axis, and also sets the
+// starting game's score and lives count for each new game.
+
 Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.constructor = Player;
 Player.prototype.update = function() {
@@ -61,6 +53,9 @@ Player.prototype.update = function() {
     this.playerScore();
     this.reset();
   }
+  // This logic detects if the player has reached the water (y axis less than
+  // 0). If so, we run the playerScore and reset methods
+  // which add points to the player's game score and resets the position
 };
 
 Player.prototype.collide = function () {
@@ -68,16 +63,22 @@ Player.prototype.collide = function () {
   this.lives = this.lives - 1;
   console.log("Oh snap! " + this.score);
 
+  // The above logic deducts points and lives if a collision is detected
+
   if (this.lives ==0) {
-    // document.getElementById("replace-h3").innerHTML = " ";
     document.getElementById("game-over").innerHTML = " - GAME OVER!!!";
   }
+  // this above if statement will update the HTML to read "GAME OVER" if
+  // if the total lives = 0
+
+  player.reset();
 
 };
 Player.prototype.playerScore = function() {
   this.score = this.score + 5;
   console.log(this.score);
-}
+};
+// This method adds points to the board when the player reaches the water!
 
 Player.prototype.handleInput = function(allowedKeys) {
   if (allowedKeys === "left") {
@@ -110,6 +111,14 @@ Player.prototype.handleInput = function(allowedKeys) {
 
   console.log(this.x, this.y);
 
+  // This feels like a very big set of if statements - I could have used
+  // a different process, like switch
+  // This set of if statements help move the player around based on
+  // which keys were inputted.
+  // This also includes logic that resets the player's x position if they
+  // move too far left or right off the canvas
+  // I originally had the success logic stored in the "right" if statement,
+  // but moved it to the player's update method
 
 };
 
@@ -118,12 +127,13 @@ Player.prototype.reset = function () {
   this.y = 386;
   this.updateScore();
 };
+// A simple reset function to reorient the player any time a reset is needed
 
 Player.prototype.updateScore = function () {
   document.getElementById("score").innerHTML = this.score;
   document.getElementById("lives").innerHTML = this.lives;
-
 }
+// This updateScore method helps push the latest score to the DOM :)
 
 Player.prototype.resetGame = function () {
   this.score = 0;
@@ -136,11 +146,18 @@ Player.prototype.resetGame = function () {
     noRepeatHearts();
   }
 };
+// I added in a Reset button to the top of the game - this button
+// enables players to refresh their game to the default settings,
+// with default score, lives count, and total hearts.
+// The only thing this doesn't do is refresh the Enemy prototype position
+// and speed, which would call for re-creating new enemy objects
 
 Player.prototype.newLife = function () {
   this.lives = this.lives +1;
   console.log(this.lives);
-}
+};
+// this method adds a new life if a collision is detected between the
+// hearts and the player
 
 
 // Creating hearts objects!
@@ -152,6 +169,14 @@ var Hearts = function () {
   this.xy = this.x +" "+this.y;
   this.appear = true;
 };
+// Woohoo! This was a lot of fun to build a brand new Class and set of
+// objects to create hearts on the board :)
+// This Class will randomly place static hearts across the stone path.
+// I added in a propery .xy which is helpful when detecting duplicates
+// of the randomly generated x and y axes (used in noRepeatHearts).
+// I also added in a propery .appear with a boolean, which is helpful
+// for determining if the heart should render after a collision.
+
 Hearts.prototype = Object.create(Enemy.prototype);
 Hearts.prototype.constructor = Hearts;
 Hearts.prototype.update = function () {
@@ -163,6 +188,10 @@ Hearts.prototype.update = function () {
         this.collide();
         player.updateScore();
       }
+      // I used the same collision detection logic from the Enemy prototype
+      // a bit of this felt duplicated but I didn't know how to refer to
+      // parts of the code while avoiding the follow-up functions also
+      // included in Enemy.update
 };
 Hearts.prototype.collide = function () {
   while (this.appear === true) {
@@ -170,9 +199,14 @@ Hearts.prototype.collide = function () {
     this.appear = false;
   }
 
+  // Once a collision is detected, the property .appear is updated to "false",
+  // which is checked out in engine.js
+
 };
 Hearts.prototype.collision = function () {
 };
+// I didn't have any code to use for this, so I created a blank
+// function instead of inheriting a non-blank collision from Enemy
 
 Hearts.prototype.reset = function() {
   console.log("before: "+ this.xy);
@@ -181,10 +215,11 @@ Hearts.prototype.reset = function() {
   this.xy = this.x +" "+this.y;
   console.log("after: "+ this.xy);
 };
+// This is a method that runs later in the program as a way to reset
+// x and y coordinates for a Heart.
+// This method runs if the function noRepeatHearts detects that two heart
+// objects share the same x and y values.
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
 
 var player = new Player();
 
@@ -203,6 +238,9 @@ var heart4 = new Hearts();
 
 var allHearts = [heart1, heart2, heart3, heart4];
 
+// I instantiate the player, enemies, and hearts!
+// I also add multiple enemies and hearts into new arrays
+
 var noRepeatHearts = function () {
   for (var i = 0; i< allHearts.length; i++) {
     for (var j = i+1; j < allHearts.length; j++) {
@@ -213,8 +251,18 @@ var noRepeatHearts = function () {
     }
   }
 };
-
 noRepeatHearts();
+
+// This was an interesting function to write. When each heart object
+// is first instantiated, there's a possibility that the randomly generated
+// x and y values might overlap with another heart object.
+// The noRepeatHearts function runs two for loops to compare array items.
+// If an overlap is detected, Hearts.reset method is called and
+// noRepeatHearts is run through again.
+// My sense is that calling the function within the function might
+// be somewhat expensive, but the function needs to run only a handful
+// of times at the maximum before all heart objects have unique x and y
+// values.
 
 
 

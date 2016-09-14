@@ -97,10 +97,21 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
-        allHearts.forEach(function(heart) {
-          heart.update(dt);
-        });
+
+        if (player.lives >0 ) {
+          player.update();
+          allHearts.forEach(function(heart) {
+            heart.update(dt);
+          });
+        }
+
+        // This was my attempt at preventing players and hearts from rendering
+        // once the player runs out of lives.
+        // While the objects stop visually rendering,
+        // I don't think this properly stops the functions (as I can
+        // continue losing lives/gaining points with the arrow keys
+        // once the game is over. I'm not sure how to best solve this.
+
 
     }
 
@@ -157,22 +168,26 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-        if (player.lives <=0 ) {
-          return;
-        } else {
+        if (player.lives >0 ) {
           player.render();
+          allHearts.forEach(function(heart) {
+            if (heart.appear === true) {
+              heart.render();
+            };
+          });
         }
 
-        allHearts.forEach(function(heart) {
-          if (heart.appear === true) {
-            heart.render();
-          };
-          // heart.render();
-        });
+        // Once again, this was my attempt at preventing the objects from
+        // rendering once the player runs out of lives. I'm sure
+        // there's a better way of fully stopping the functions from running
+        // as well.
+        // Also, this portion of the code checks if the heart object's
+        // property "appear" is listed as true. If it is, the heart will
+        // render in the game. If listed as "false", then the heart
+        // no longer appears (as the player collected the heart!)
 
-        // if (heart1.appear === true) {
-        //   heart1.render();
-        // }
+
+
     }
 
     /* This function does nothing but it could have been a good place to
