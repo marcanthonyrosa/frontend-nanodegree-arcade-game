@@ -14,11 +14,16 @@ _Note_: I'm exploring ways to host this online for players interested in running
 # Gameplay and rules
 
 ### Goal of the game:
+* Start each game with 5 lives and 0 points
+* Your goal is to run across the rock path and jump into the water! Every time you succeed without hitting an enemy, you gain 5 points!
 * Collect as many points before your total lives runs out to 0!
-* Begin with 5 lives and 0 points
+
 
 ### How to play:
 * Use your arrow keys (Up, Down, Left, Right) to control your player's movement across the game board
-* Your goal is to run across the rock path and jump into the water! Every time you succeed without hitting an enemy, you gain 5 points!
+
 * Dodge the enemy creatures who move left-to-right - if you collide with an enemy, you lose a life (and points!) and you reset to your starting position.
 * Gain additional lives by collecting hearts, which are scattered across the game board. Each heart = 1 additional life.
+
+### Other gameplay details
+* You're able to restart an instance of your game by clicking the "Restart" button above the game canvas. Doing so will reset your total lives, points, and hearts count (in different places on the canvas).
