@@ -133,6 +133,7 @@ Player.prototype.resetGame = function () {
   for (var i = 0; i< allHearts.length; i++) {
     allHearts[i].appear = true;
     allHearts[i].reset();
+    noRepeatHearts();
   }
 };
 
@@ -174,10 +175,12 @@ Hearts.prototype.collision = function () {
 };
 
 Hearts.prototype.reset = function() {
+  console.log("before: "+ this.xy);
   this.x = 0 + (101 * Math.floor(Math.random()*7));
   this.y = 83 + (83 * Math.floor(Math.random()*3));
-}
-
+  this.xy = this.x +" "+this.y;
+  console.log("after: "+ this.xy);
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -205,7 +208,7 @@ var noRepeatHearts = function () {
     for (var j = i+1; j < allHearts.length; j++) {
       if (allHearts[i].xy === allHearts[j].xy) {
         allHearts[j].reset();
-        console.log("reset it!");
+        noRepeatHearts();
       }
     }
   }

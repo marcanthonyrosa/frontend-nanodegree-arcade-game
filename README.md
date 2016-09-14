@@ -1,6 +1,24 @@
-frontend-nanodegree-arcade-game
-===============================
+# Introduction
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+This is a web game inspired by the classic arcade game Frogger, written in JavaScript that takes advantage of Object Oriented programming. I built this game with the help of Udacity's JavaScript course and leaned on a [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) to build this program.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+
+# Installation
+To run this game:
+1. Fork or download this project repository on your local machine
+2. Open up the index.html in a compatible browser.
+3. Game should run automatically!
+
+_Note_: I'm exploring ways to host this online for players interested in running this from a domain.
+
+# Gameplay and rules
+
+### Goal of the game:
+* Collect as many points before your total lives runs out to 0!
+* Begin with 5 lives and 0 points
+
+### How to play:
+* Use your arrow keys (Up, Down, Left, Right) to control your player's movement across the game board
+* Your goal is to run across the rock path and jump into the water! Every time you succeed without hitting an enemy, you gain 5 points!
+* Dodge the enemy creatures who move left-to-right - if you collide with an enemy, you lose a life (and points!) and you reset to your starting position.
+* Gain additional lives by collecting hearts, which are scattered across the game board. Each heart = 1 additional life.
