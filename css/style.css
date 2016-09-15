@@ -16,3 +16,14 @@ button {
   flex-wrap: nowrap;
   flex-flow: center;
 }
+
+.controls {
+  font-size: 24px;
+}
+
+
+@media screen and (min-width: 500px) {
+  .controls {
+    display: none;
+  }
+}

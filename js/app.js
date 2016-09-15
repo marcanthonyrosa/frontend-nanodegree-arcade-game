@@ -265,7 +265,18 @@ noRepeatHearts();
 // values.
 
 
-
+document.getElementById("up").onclick = function () {
+  player.handleInput('up');
+}
+document.getElementById("down").onclick = function () {
+  player.handleInput('down');
+}
+document.getElementById("left").onclick = function () {
+  player.handleInput('left');
+}
+document.getElementById("right").onclick = function () {
+  player.handleInput('right');
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
