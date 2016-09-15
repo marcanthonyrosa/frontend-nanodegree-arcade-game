@@ -223,20 +223,25 @@ Hearts.prototype.reset = function() {
 
 var player = new Player();
 
-var enemy1 = new Enemy();
-var enemy2 = new Enemy();
-var enemy3 = new Enemy();
-var enemy4 = new Enemy();
-var enemy5 = new Enemy();
+var allEnemies = [];
+var allHearts = [];
 
-var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
+var createEnemies = function(count) {
+  for (var i=0; i<count; i++) {
+    allEnemies.push(new Enemy());
+  }
+}
 
-var heart1 = new Hearts();
-var heart2 = new Hearts();
-var heart3 = new Hearts();
-var heart4 = new Hearts();
+var createHearts = function(count) {
+  for (var i=0; i<count; i++) {
+    allHearts.push(new Hearts());
+  }
+}
 
-var allHearts = [heart1, heart2, heart3, heart4];
+createEnemies(6);
+createHearts(4);
+
+
 
 // I instantiate the player, enemies, and hearts!
 // I also add multiple enemies and hearts into new arrays
