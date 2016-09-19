@@ -238,9 +238,9 @@ var createHearts = function(count) {
   }
 }
 
-createEnemies(6);
-createHearts(4);
 
+createEnemies(Math.ceil((Math.random()*6)+4));
+createHearts(4);
 
 
 // I instantiate the player, enemies, and hearts!
