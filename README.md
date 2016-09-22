@@ -4,7 +4,9 @@ This is a web game inspired by the classic arcade game Frogger, written in JavaS
 
 
 # Installation
-To run this game:
+No installation is required. To play this game, simply navigate to the index page hosted by github.io [here at this link](http://marcrosa.me/ladybug-frogger/).
+
+To run this game on your local machine:
 1. Fork or download this project repository on your local machine
 2. Open up the index.html in a compatible browser.
 3. Game should run automatically!
@@ -27,3 +29,26 @@ _Note_: I'm exploring ways to host this online for players interested in running
 
 ### Other gameplay details
 * You're able to restart an instance of your game by clicking the "Restart" button above the game canvas. Doing so will reset your total lives, points, and hearts count (in different places on the canvas).
+
+# License
+MIT License
+
+Copyright (c) 2016 Marc Anthony Rosa
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
